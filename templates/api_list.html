@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>title</th>
+            <th>code</th>
+            <th>cb_price</th>
+            <th>nbu_buy_price</th>
+            <th>nbu_cell_price</th>
+            <th>date</th>
+        </tr>
+        </thead>
+        <tbody id="currency-table">
+        </tbody>
+    </table>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+<script>
+    $(function () {
+        $.getJSON("https://nbu.uz/uz/exchange-rates/json/", function (data) {
+            for (const currency of data) {
+                let row = "<tr>";
+                row += "<td>" + currency.title + "</td>"
+                row += "<td>" + currency.code + "</td>"
+                row += "<td>" + currency.cb_price + " so'm</td>"
+                row += "<td>" + currency.nbu_buy_price + " so'm</td>"
+                row += "<td>" + currency.nbu_cell_price + " so'm</td>"
+                row += "<td>" + currency.date + "</td>"
+                row += "</tr>"
+                $("#currency-table").append(row);
+            }
+        })
+    })
+</script>
+</html>
